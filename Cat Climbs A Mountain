@@ -1,0 +1,70 @@
+import pygame
+import time
+
+# Initialize Pygame
+pygame.init()
+
+# Set the dimensions of the game window
+WIDTH = 800
+HEIGHT = 600
+window = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Cat Climbs a Mountain")
+
+# Define colors
+WHITE = (255, 255, 255)
+
+# Load cat and mountain images
+cat_image = pygame.image.load("cat.png")  # Replace "cat.png" with the actual file path of your cat image
+mountain_image = pygame.image.load("mountain.png")  # Replace "mountain.png" with the actual file path of your mountain image
+
+# Resize cat and mountain images
+cat_image = pygame.transform.scale(cat_image, (100, 100))
+mountain_image = pygame.transform.scale(mountain_image, (WIDTH, HEIGHT))
+
+# Set initial position of the cat
+cat_x = 350
+cat_y = HEIGHT
+
+# Set initial position of the mountain
+mountain_x = 0
+mountain_y = 0
+
+# Define animation variables
+cat_speed = 2
+mountain_speed = 1
+
+# Game loop
+running = True
+while running:
+    # Event handling
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Update cat position
+    cat_y -= cat_speed
+
+    # Update mountain position
+    mountain_y -= mountain_speed
+
+    # Clear the screen
+    window.fill(WHITE)
+
+    # Draw the mountain
+    window.blit(mountain_image, (mountain_x, mountain_y))
+
+    # Draw the cat
+    window.blit(cat_image, (cat_x, cat_y))
+
+    # Update the display
+    pygame.display.flip()
+
+    # Set the frame rate
+    time.sleep(0.02)
+
+    # Check if the cat reaches the top of the mountain
+    if cat_y <= 0:
+        running = False
+
+# Quit the game
+pygame.quit()
